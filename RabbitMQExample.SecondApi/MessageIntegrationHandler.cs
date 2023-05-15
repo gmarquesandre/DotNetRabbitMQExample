@@ -1,18 +1,24 @@
 ﻿using EasyNetQ;
 using RabbitMQExample.Core;
+using RabbitMQExample.Core.MessageBus;
 using RabbitMQExample.Core.RequestResponse;
 
 namespace RabbitMQExample.SecondApi
 {
     public class MessageIntegrationHandler : BackgroundService
     {
-        private IBus _bus;
+        private IMessageBus _bus;
+
+        public MessageIntegrationHandler(IMessageBus bus)
+        {
+            _bus = bus;
+        }
 
         protected override Task ExecuteAsync(CancellationToken stoppingToken)
         {
-            _bus = RabbitHutch.CreateBus("host=localhost:5672");
-            _bus.Rpc.RespondAsync<MessageIntegrationEvent, ResponseMessage>(
-                async request => 
+     
+           _bus.RespondAsync<MessageIntegrationEvent, ResponseMessage>(
+                 async request => 
                 new ResponseMessage(await BuscarMensagem())
 
         

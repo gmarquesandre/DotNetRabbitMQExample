@@ -13,6 +13,8 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddMessageBus(builder.Configuration.GetMessageQueueConnection("MessageBus"))
     .AddHostedService<MessageIntegrationHandler>();
 
+builder.Services.AddSwaggerGen();
+
 var app = builder.Build();
 
 

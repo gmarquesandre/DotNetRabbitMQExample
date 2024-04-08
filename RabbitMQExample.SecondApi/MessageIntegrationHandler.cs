@@ -19,17 +19,18 @@ namespace RabbitMQExample.SecondApi
      
            _bus.RespondAsync<MessageIntegrationEvent, ResponseMessage>(
                  async request => 
-                new ResponseMessage(await BuscarMensagem())
+                new ResponseMessage(await BuscarMensagem(request))
 
         
                 );
            return Task.CompletedTask; 
         }
 
-        private async Task<string> BuscarMensagem()
+        private async Task<string> BuscarMensagem(MessageIntegrationEvent requestMessage)
         {
+
             await Task.Delay(1000);
-            return $"Mensagem Respondida {DateTime.Now}";
+            return $"{requestMessage.Message} -> Mensagem Respondida {DateTime.Now}";
         }
     }
 }

@@ -13,14 +13,18 @@
 
     public class MessageIntegrationEvent : IntegrationEvent
     {
+        protected MessageIntegrationEvent()
+        {
+            
+        }
         public MessageIntegrationEvent(Guid id, string mensagem)
         {
             Id = id;
             Message = mensagem;
         }
 
-        public Guid Id { get; private set; }
-        public string Message { get; private set; }
+        public Guid Id { get; set; }
+        public string Message { get; set; }
 
     }
 }
